@@ -6,7 +6,8 @@ USE musicstore;
 CREATE TABLE s_user(
 	username varchar(255),
 	password varchar(255),
-	user_id int
+	user_id int,
+	PRIMARY KEY (user_id)
 );
 
 CREATE TABLE album(
