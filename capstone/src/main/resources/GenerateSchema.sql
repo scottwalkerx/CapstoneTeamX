@@ -1,3 +1,5 @@
+DROP DATABASE musicstore;
+
 CREATE DATABASE musicstore;
 USE musicstore;
 
@@ -10,7 +12,8 @@ CREATE TABLE s_user(
 CREATE TABLE album(
 	album_id int NOT NULL,
 	title varchar(255),
-	description varchar(255)
+	description varchar(255),
+	PRIMARY KEY (album_id)
 );
 
 CREATE TABLE music(
