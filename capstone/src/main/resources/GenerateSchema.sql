@@ -8,7 +8,7 @@ CREATE TABLE s_user(
 	password varchar(255),
 	phone varchar(255),
 	user_id int,
-	is_admin boolean,
+	role varchar(255),
 	PRIMARY KEY (user_id)
 );
 
