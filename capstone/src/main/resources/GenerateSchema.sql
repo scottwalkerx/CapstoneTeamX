@@ -10,6 +10,8 @@ CREATE TABLE s_user(
 	PRIMARY KEY (user_id)
 );
 
+--TODO: Add payment information
+
 CREATE TABLE album(
 	album_id int NOT NULL,
 	title varchar(255),
@@ -43,7 +45,22 @@ CREATE TABLE category(
 CREATE TABLE cart(
 	cart_id int,
 	user_id int,
+	--This records whether the purchase has been made
+	--and is set to false for default
+	--if it has been purchased, there is an object
+	--in the purchased table pointing to it
+	--A new cart object will be generated
+	is_purchased BOOLEAN,
 	PRIMARY KEY (cart_id)
+);
+
+--Keeps record of past transactions
+--purchased carts are maintained in the
+--database for later viewing
+CREATE TABLE transaction(
+	transaction_id int,
+	cart_id int,
+	purchased_on date
 );
 
 --This joint table is a design pattern for 
@@ -55,10 +72,14 @@ CREATE TABLE cart(
 --for the entry
 CREATE TABLE cartmusic(
 	cartmusic_id int,
-	cart_id int,
-	music_id int,
+	cart_id int NOT NULL,
+	FOREIGN KEY (cart_id) REFERENCES cart(cart_id),
+	music_id int NOT NULL,
+	FOREIGN KEY (music_id) REFERENCES music(music_id),
 	PRIMARY KEY (cartmusic_id)
 )
+
+
 
 --Adds foreign key constraints to MUSIC table
 ALTER TABLE music 
