@@ -11,7 +11,7 @@ CREATE TABLE s_user(
 );
 
 /*TODO: Add payment information*/
-
+/*
 CREATE TABLE album(
 	album_id int NOT NULL,
 	title varchar(255),
@@ -28,7 +28,7 @@ CREATE TABLE music(
 	category_id int, 
 	PRIMARY KEY (music_id)
 );
-
+*/
 CREATE TABLE genre(
 	genre_id int NOT NULL,
 	name varchar(255),
@@ -42,6 +42,11 @@ CREATE TABLE category(
 	PRIMARY KEY (category_id)
 );
 
+CREATE TABLE product(
+	product_id int,
+	price decimal(19, 2),
+	PRIMARY KEY (product_id)
+);
 
 CREATE TABLE cart(
 	cart_id int,
@@ -71,24 +76,25 @@ CREATE TABLE transaction(
 --points to the id of the music entry and the
 --cart_id points to the id of the cart
 --for the entry*/
-CREATE TABLE cartmusic(
-	cartmusic_id int,
+CREATE TABLE cartproduct(
+	cartproduct_id int,
 	cart_id int,
 	FOREIGN KEY (cart_id) REFERENCES cart(cart_id),
-	music_id int,
-	FOREIGN KEY (music_id) REFERENCES music(music_id),
-	PRIMARY KEY (cartmusic_id)
+	product_id int,
+	FOREIGN KEY (product_id) REFERENCES product(product_id),
+	PRIMARY KEY (cartproduct_id)
 );
 
 
 
 /*Adds foreign key constraints to MUSIC table*/
+/*
 ALTER TABLE music 
 ADD FOREIGN KEY (category_id) REFERENCES category(category_id);
 
 ALTER TABLE music 
 ADD FOREIGN KEY (album_id) REFERENCES album(album_id);
-
+*/
 /*Adds foreign key constraints to CATEGORY table*/
 ALTER TABLE category 
 ADD FOREIGN KEY (genre_id) REFERENCES genre(genre_id);
