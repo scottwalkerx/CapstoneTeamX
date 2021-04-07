@@ -6,6 +6,7 @@ USE musicstore;
 CREATE TABLE s_user(
 	username varchar(255),
 	password varchar(255),
+	phone varchar(255),
 	user_id int,
 	is_admin boolean,
 	PRIMARY KEY (user_id)
@@ -53,17 +54,16 @@ CREATE TABLE album(
 	FOREIGN KEY (product_id) REFERENCES product(product_id)
 );
 
-CREATE TABLE music(
-	music_id int NOT NULL,
+CREATE TABLE track(
+	track_id int NOT NULL,
 	title varchar(255),
 	description varchar(255),
 	price decimal(19,2),
 	album_id int,
-	category_id int, 
+	product_id int, 
 	FOREIGN KEY (album_id) REFERENCES album(album_id),
-	FOREIGN KEY (category_id) REFERENCES category(category_id),
-	PRIMARY KEY (music_id)
-	
+	FOREIGN KEY (product_id) REFERENCES product(product_id),
+	PRIMARY KEY (track_id)
 );
 
 CREATE TABLE cart(
@@ -93,8 +93,8 @@ CREATE TABLE transaction(
 /*This joint table is a design pattern for 
 --many-to-many relationships in databases
 --Each entry corresponds to one entry of 
---one music object in a music cart. The music_id
---points to the id of the music entry and the
+--one track object in a track cart. The track_id
+--points to the id of the track entry and the
 --cart_id points to the id of the cart
 --for the entry*/
 CREATE TABLE cartproduct(
