@@ -12,6 +12,12 @@ CREATE TABLE s_user(
 	PRIMARY KEY (user_id)
 );
 
+CREATE TABLE artist(
+	artist_id int,
+	PRIMARY KEY (artist_id),
+	name varchar(255)
+);
+
 CREATE TABLE payment_info(
 	payment_info_id int,
 	PRIMARY KEY (payment_info_id),
@@ -19,7 +25,8 @@ CREATE TABLE payment_info(
 	FOREIGN KEY (user_id) REFERENCES s_user(user_id),
 	card_number varchar(17),
 	expiration varchar(7),
-	cvv varchar(4)
+	cvv varchar(4),
+	address varchar(255)
 );
 
 CREATE TABLE genre(
@@ -61,6 +68,8 @@ CREATE TABLE track(
 	price decimal(19,2),
 	album_id int,
 	product_id int, 
+	artist_id int,
+	FOREIGN KEY (artist_id) REFERENCES artist(artist_id),
 	FOREIGN KEY (album_id) REFERENCES album(album_id),
 	FOREIGN KEY (product_id) REFERENCES product(product_id),
 	PRIMARY KEY (track_id)
