@@ -78,6 +78,7 @@ CREATE TABLE track(
 CREATE TABLE cart(
 	cart_id int,
 	user_id int,
+	FOREIGN KEY (user_id) REFERENCES s_user(user_id),
 /*This records whether the purchase has been made
 --and is set to false for default
 --if it has been purchased, there is an object
