@@ -68,6 +68,8 @@ CREATE TABLE track(
 	price decimal(19,2),
 	album_id int,
 	product_id int, 
+	artist_id int,
+	FOREIGN KEY (artist_id) REFERENCES artist(artist_id),
 	FOREIGN KEY (album_id) REFERENCES album(album_id),
 	FOREIGN KEY (product_id) REFERENCES product(product_id),
 	PRIMARY KEY (track_id)
