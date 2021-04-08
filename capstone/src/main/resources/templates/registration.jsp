@@ -9,10 +9,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form th:action="@{/login}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
-</form>
-
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -40,6 +36,15 @@
                 
                 <div class="form-group">
                     <div class="col-sm-9">
+                        <input type="number" th:field="*{phoneNumber}"
+                               placeholder="Phone Number" class="form-control"/> <label
+                            th:if="${#fields.hasErrors('phoneNumber')}" th:errors="phoneNumber"
+                            class="validation-message"></label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-9">
                         <input type="password" th:field="*{password}"
                                placeholder="Password" class="form-control"/> <label
                             th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
@@ -56,6 +61,11 @@
                 <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
 
             </form>
+            <div class="form-group" style="width:73%;">
+            <form th:action="@{/login}" method="get">
+	    		<button class="btn btn-warning btn-block" type="Submit">Go To Login Page</button>
+			</form>
+			</div>
         </div>
     </div>
 </div>

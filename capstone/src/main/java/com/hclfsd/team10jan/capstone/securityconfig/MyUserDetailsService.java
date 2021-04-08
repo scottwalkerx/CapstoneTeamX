@@ -31,7 +31,7 @@ public class MyUserDetailsService implements UserDetailsService{
 		if (user == null) {
 			throw new UsernameNotFoundException("Username: " + username + " not FOUND!");
 		}
-		List<GrantedAuthority> authorities = Arrays.stream(user.getRoles().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+		List<GrantedAuthority> authorities = Arrays.stream(user.getRoles().split(";")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 		
 		return buildUserForAuthentication(user, authorities);
 	}

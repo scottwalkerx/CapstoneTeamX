@@ -13,19 +13,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="cart")
+@Table(name="category")
 @Data
 @NoArgsConstructor
-public class Cart {
+public class Category {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="cart_id")
-	private Integer id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name="category_id")
+    private Integer id;
+	
+	@Column(name="name")
+	private String name;
 	
 	@ManyToOne
-	@JoinColumn(name="user_id")
-	private User user;
-	
-	@Column(name="is_purchased")
-	private Boolean isPurchased;
+	@JoinColumn(name="genre_id")
+	private Genre genre;
 }

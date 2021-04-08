@@ -2,6 +2,9 @@ package com.hclfsd.team10jan.capstone.controllers;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -32,7 +35,7 @@ public class UserController {
 	 }
 	  
 	@PostMapping(value = "/registration")
-	public ModelAndView createNewUser(User user, BindingResult bindingResult) {
+	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
 	    ModelAndView modelAndView = new ModelAndView();
 	    User userExists = userService.findUserByUserName(user.getUsername());
 	    if (userExists != null) {
@@ -53,10 +56,13 @@ public class UserController {
 	}
 	
 	@GetMapping("/home")
-	public String getHomePage(ModelMap model, Principal principal) {
+	public String getHomePage(ModelMap model, Principal principal, HttpServletRequest request) {
 		String username = principal.getName();
 		User user = userService.findUserByUserName(username);
 		model.addAttribute("user", user);
-		return "home";
+		if (request.isUserInRole("ROLE_ADMIN")) {
+            return "homeAdmin";
+        }
+        return "home";
 	}
 }

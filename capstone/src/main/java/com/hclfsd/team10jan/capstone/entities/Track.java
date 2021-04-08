@@ -1,25 +1,34 @@
 package com.hclfsd.team10jan.capstone.entities;
 
+
 import javax.persistence.*;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
-@Table(name="album")
+@Table(name="track")
 @Data
 @NoArgsConstructor
-public class Album {
+public class Track {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="album_id")
+    @Column(name="track_id")
     private Integer id;
-    
+
     @Column(name="title")
     private String title;
     
     @Column(name="description")
     private String description;
+    
+    @Column(name="price")
+    private Double price;
+
+    @ManyToOne
+    @JoinColumn(name="album_id")
+    private Album album;
     
     @ManyToOne
     @JoinColumn(name="product_id")
